@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Handling</title>
+    <style>
+       
+      .container{
+        width:20%;
+        height:20%;
+        border: 5px solid red;
+        position:absolute;
+        left: 50%;
+        top:50%;
+        transform:translate(-50%,-50%);
+        text-align: center;
+      }
+    </style>
+</head>
+<body>
+    <!--Js Starts-->
+    <section class="container">
+        <h1 id="msg"></h1>
+    </section>
+    <script>
+      fetch("https://jsonplaceholder.typicode.com/posts/123456789").then((response)=>{
+        if(!response.ok){
+            try{
+            throw new Error("Network response was not ok");
+            }
+            catch(error)
+            {
+                let msg=document.getElementById('msg');
+                msg.textContent=error;
+                console.log(".....",error.message)
+            }
+        }
+        
+       });
+      
+    </script>
+    <!--js Ends-->
+</body>
+</html>

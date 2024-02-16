@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS</title>
+    <style>
+        
+        section{
+            height:100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <h1></h1>
+    </section>
+     <script>
+  function manuplateString(inputString,callback)
+     {
+       let manuplatedString=inputString.toUpperCase();
+       callback(manuplatedString)
+     }
+
+   function logString(manuplatedString)
+    {
+        //DESIGN THE OUTPUT ON WEB PAGE
+        let displayName=document.querySelector('h1');
+        displayName.style.border='5px solid green';
+        displayName.style.padding='0.5rem';
+        displayName.style.color='blue';
+        displayName.textContent=`${manuplatedString}`;
+        console.log(`The manuplated String is:${manuplatedString}`)
+    }
+
+    //EXECUTION OF THE PROGRAM WILL START FROM HERE ,TAKING INPUT FROM USER
+    let  name=prompt("Enter Your Name");
+      
+       if(isNaN(name))
+       {
+         //AFTER VALIDATION CALL ACTUAL LOGIC
+          manuplateString(name,logString);
+       }
+       else{
+        alert("please enter your Name In Proper Manner");
+       }
+    
+    
+
+     </script>     
+</body>
+</html>

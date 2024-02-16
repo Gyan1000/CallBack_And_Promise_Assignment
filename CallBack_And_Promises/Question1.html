@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      section{ 
+          
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            font-size: 2rem;
+        }
+        
+    </style>
+  </head>
+  <body>
+    <section>
+      <p>
+
+      </p>
+    </section>
+
+    <script>
+          
+      let array=[];
+     function validation(){ 
+      let iterate = prompt("How Many Number ,You want to enter");
+      while (iterate > 0) 
+      {
+         let no=prompt("Enter Your Number");
+         if(isNaN(no))
+         {
+           alert("Please Enter Numeric Value Only And Try Again");
+           break; 
+        }  
+         else
+         {
+            array.push(no);
+         } 
+         iterate--;
+      }
+       if(iterate==0){ 
+        let doubleArr = doubleArrayE(array, doubleArr_E);
+
+        // FORMATE THE OUTPUT
+        let displayValue=document.querySelector('P');
+        displayValue.style.border='5px solid green';
+        displayValue.style.padding='0.5rem';
+        displayValue.style.color='blue';
+        displayValue.textContent=`${doubleArr}`;
+        console.log(`ARRAY :${doubleArr}`)
+
+        console.log(doubleArr);
+       }
+     }
+
+      function doubleArrayE(array, callback) {
+        let arr = [];
+        
+      for (let element of array) {
+          arr.push(callback(element));
+        }
+        return arr;
+      }
+
+      
+
+      function doubleArr_E(num) {
+        return num * 2;
+      }
+
+     validation();  
+
+    </script>
+  </body>
+</html>

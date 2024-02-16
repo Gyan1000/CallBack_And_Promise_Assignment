@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Deatls</title>
+ <style>
+    body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height:100vh;
+    }
+    section{
+        
+        display: flex;
+        align-items: center;
+        justify-content: center; 
+        border: 5px solid green;
+        background-color: whitesmoke;
+        width:50%;
+    }
+    #books_title{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+       
+    }
+    #books_title span{
+        /* padding:5rem; */
+        font-size: larger;
+        font-weight: bold;
+        color:blue;
+        text-align: center;
+        letter-spacing: 2px;
+    }
+    .hide{
+      display: none;
+    }
+ </style>  
+</head>
+
+  <body>
+    <section class="hide">
+      
+        <p id="books_title">
+            
+        </p>
+    </section>
+    <script>
+       
+   //TAKING BOOK'S DETAILS INPUT FROM THE USER  
+      
+   function bookDetails(callBack){ 
+        let number_OfBooks=parseInt(prompt("How many Books Details You Want To Enter"));
+
+      if(isNaN(number_OfBooks))
+        {
+          alert("Please Enter Numeric value For Book");
+        }
+
+      else{
+          let books=[];
+ 
+        while(number_OfBooks>0)
+        {
+            let bookDetails={};
+            
+               bookDetails.title=prompt("Enter Book Title");
+               bookDetails.author=prompt("Enter Book author");
+               bookDetails.year=prompt("Enter Book year");
+               
+              books.push(bookDetails);
+            
+              number_OfBooks=number_OfBooks-1;
+    
+        }
+        callBack(books,extractBookTitles);
+      }
+         
+      }
+  
+      //validate the user inputs then call the logic part 
+        function validate(books, callBack) {
+          let i=0;
+          while(i<books.length){   
+               if (!isNaN(books[i].title) || books[i].title.length < 1) {
+
+                   alert(`PLEASE ENTER YOUR BOOK'S ${i+1} TITLE  IN PROPER MANNER`);
+                   break;
+         
+               } 
+             else if (!isNaN(books[i].author) ||books[i].author.length < 1)
+               {
+
+                   alert(`PLEASE ENTER YOUR  BOOK'S ${i+1} AUTHOR NAME IN PROPER MANNER`);
+                   break;
+                } 
+            else if (isNaN(books[i].year) || books[i].year < 1) {
+
+                   alert(`PLEASE ENTER YOUR BOOK'S ${i+1} RELEASED YEAR IN NUMERIC VALUE AND YEAR>0`);
+                   break;
+               } 
+
+               i++;
+            }
+        if(i==books.length)
+        {
+          callBack(books, sortTitles);   
+        }
+
+        else{
+          bookDetails(validate)
+         }
+      }
+
+      
+      function sortTitles(titles) {
+        titles.sort();
+        // FORMATTING BOOK'S TITLE ON THE WEB PAGE
+        let section=document.querySelector("section");
+        section.classList.remove('hide');
+
+        let book_title=document.getElementById("books_title");
+      
+        book_title.innerHTML=`<h1>Book's Title</h2>`;
+      
+        let title=document.createElement('span');
+       
+        for(b_title of titles)
+        {
+            title.innerHTML+=`${b_title}</br>`;
+            console.log("..... ",b_title);
+        }
+       
+        book_title.append(title);
+        
+        console.log(titles.join("\n"));
+      }
+
+      function extractBookTitles(books, callBack) {
+        const titles = books.map((book) => book.title);
+        callBack(titles);
+      }
+
+    //The code's execution will start from here
+      bookDetails(validate);
+     
+    </script>
+  </body>
+</html>

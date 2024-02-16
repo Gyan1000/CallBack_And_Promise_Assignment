@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promise Example</title>
+    <style>
+      section {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <p></p>
+    </section>
+    <script>
+      function greet(name) {
+        return new Promise((resolve) => {
+          const greeting = `Hello, ${name}`;
+          resolve(greeting);
+        });
+      }
+      function validate() {
+        let name = prompt("Enter Your Name");
+
+        if (isNaN(name)) {
+            greet(name).then((msg) => {
+            let displayMsg = document.querySelector("P");
+            displayMsg.style.border = "5px dashed green";
+            displayMsg.style.padding = "0.5rem";
+            displayMsg.style.color = "blue";
+            displayMsg.textContent = `${msg}`;
+            console.log(msg);
+          });
+        }
+
+        else {
+          alert("Enter Your Name In Proper Manner");
+        }
+      }
+      validate()
+    </script>
+  </body>
+</html>

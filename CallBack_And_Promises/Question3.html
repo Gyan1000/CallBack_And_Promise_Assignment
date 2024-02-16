@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Print Person's Details</title>
+    <style>
+      section {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 5px dashed green;
+        width: 50%;
+      }
+      #person_info {
+        color: gray;
+        font-size: larger;
+        font-weight: 900;
+        text-align: center;
+      }
+      #person_info p span {
+        color: blue;
+        font-weight: bolder;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div id="person_info"></div>
+    </section>
+    <script>
+      
+
+      const person_info = {};
+
+      // validate user info 
+      function validate(person_info, callBack) {
+        if (!isNaN(person_info.firstName) || person_info.firstName.length < 1) {
+
+          alert("PLEASE ENTER YOUR FIRSTNAME IN PROPER MANNER");
+          yourPersonalDetails(validate);
+
+        } 
+        else if (!isNaN(person_info.lastName) ||person_info.lastName.length < 1)
+         {
+
+          alert("PLEASE ENTER YOUR  LASTNAME IN PROPER MANNER");
+          yourPersonalDetails(validate);
+
+        } 
+        else if (isNaN(person_info.age) || person_info.age < 1) {
+
+          alert("PLEASE ENTER YOUR AGE IN NUMERIC VALUE AND AGE>0");
+          yourPersonalDetails(validate);
+        } 
+
+        else {
+            callBack(person_info, printResult);
+          }
+      }
+      
+      function yourPersonalDetails(callBack) {
+        alert("YOU HAVE TO ENTER YOUR PERSONAL DETAILS");
+
+        person_info.firstName = prompt("Enter Person's FirstName");
+        person_info.lastName = prompt("Enter Person's LastName");
+        person_info.age = prompt("Enter Person's Age");
+
+        callBack(person_info, ageInDays);
+      }
+    //   Enter Your Personal Details
+      yourPersonalDetails(validate);
+
+    //   CALCULATE AGE IN DAYS
+      function ageInDays(personObject, callBack) {
+        const fullName = `${personObject.firstName} ${personObject.lastName}`;
+        const ageInDays = personObject.age * 365;
+        callBack(fullName, ageInDays);
+      }
+
+      function printResult(fullName, ageInDays) {
+        // FORMATTING PERSON_INFORMATION
+        let person_info = document.getElementById("person_info");
+        person_info.innerHTML = "<h1 style=color:green;>PERSON'S DETAILS</h1>";
+        let details = document.createElement("p");
+        details.innerHTML = `The person's full name is <span>${fullName}</span> and their age in days is
+        <span> ${ageInDays}</span>`;
+        person_info.append(details);
+        console.log(
+          `The person's full name is ${fullName} and their age in days is ${ageInDays}`
+        );
+      }
+    </script>
+  </body>
+</html>
